@@ -53,7 +53,7 @@ def mergeSort(nums):
     #Ordenamos y fusionamos cada mitad
     
     left_list = mergeSort(nums[:mid])
-    right_list = mergeSort(nums[:mid])
+    right_list = mergeSort(nums[mid:])
     
     #Fusionamos las listas ordenadas en una nueva ordenada
     
