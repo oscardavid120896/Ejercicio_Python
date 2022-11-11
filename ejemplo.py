@@ -1,27 +1,70 @@
-import pandas as pd 
-import matplotlib.pyplot as plt 
-
-def diagrama_lineas_ingresos_gastos(datos):
-    '''Función que construye un diagrama de lineas con los ingresos y gastos de un cuatrimestre.
+def merge(left_list, right_list):
+    sorted_list = []
+    left_list_index = right_list_index = 0
     
-    Parámetros:
-        - datos: Es un dataframe de Pandas con dos columnas, una para los ingresos y otra para los gastos, y como índice los meses.
+    #Creamos variables para las longitudes de la lista
+    left_list_length, right_list_length = len(left_list), len(right_list)
+    
+    for _ in range(left_list_length + right_list_length):
+        if left_list_index < right_list_index and right_list_index < right_list_length:
+            
+            #Comprobamos el valor de cada elemento inicial de las listas para ver
+            #cual es menor. Si el elemento al principio de la lista izquierda en más pequeño
+            #se añade a la lista ordenada
+            
+            if left_list[left_list_index] <= right_list[right_list_index]:
+                sorted_list.append(left_list[left_list_index])
+                left_list_index += 1
+            
+            #Si el elemento al principio de la lista de la derecha es más pequeño,
+            #se añade a la lista ordenada
+            
+            else:
+                sorted_list.append(right_list[right_list_index])
+                right_list_index += 1
+        
+        #Si llegamos al final de la lista de la izquierda, añadimos los elementos 
+        #de la lista de la derecha
+        
+        elif left_list_index == left_list_length: 
+            sorted_list.append(right_list[right_list_index])
+            right_list_index += 1
+        
+        #Si llegamos al final de la lista de la derecha, añadimos los elementos 
+        #de la lista de la izquierda
+        
+        elif right_list_index == right_list_length:
+            sorted_list.append(left_list[left_list_index])
+            left_list_index += 1
+        
+    return sorted_list
 
-    Salida:
-        Un gráfico de líneas con los ingresos y los gastos dados.
-    '''
-    # Definimos la figura y los ejes del gráfico con Matplotlib
-    fig, ax = plt.subplots()
-    # Dibujamos las series de líneas con los ingresos y los gastos
-    datos.plot(ax = ax)
-    # Añadimos la escala del eje y
-    ax.set_ylim([0, max(datos.Ingresos.max(), datos.Gastos.max()) + 500])
-    # Añadimos el título
-    plt.title('Evolución de ingresos y gastos')
-    # Devolvemos el objeto con los ejes y el gráfico que contienten
-    return ax
+def mergeSort(nums):
+    
+    #Si la lista tiene un solo elemento, devuélvelo
+    
+    if len(nums) <= 1:
+        return nums
+    
+    #Obtenemos el índice medio para separar la lista en dos
+    
+    mid = len(nums) // 2
+    
+    #Ordenamos y fusionamos cada mitad
+    
+    left_list = mergeSort(nums[:mid])
+    right_list = mergeSort(nums[:mid])
+    
+    #Fusionamos las listas ordenadas en una nueva ordenada
+    
+    return merge(left_list,right_list)
 
-datos = {'Mes':['Ene', 'Feb', 'Mar', 'Abr'], 'Ingresos':[4500, 5200, 4800, 5300], 'Gastos':[2300, 2450, 2000, 2200]}
-df_datos = pd.DataFrame(datos).set_index('Mes')
-diagrama_lineas_ingresos_gastos(df_datos)
-plt.show()
+#Comprobamos el funcionamiento 
+listaNumerosAleatorios = [5, 2, 1, 8, 4]
+print("Lista sin ordenar: " + str(listaNumerosAleatorios))
+listaNumerosAleatorios = mergeSort(listaNumerosAleatorios)
+print("Lista ordenada: " + str(listaNumerosAleatorios))
+    
+        
+        
+        
