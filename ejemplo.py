@@ -60,7 +60,7 @@ def mergeSort(nums):
     return merge(left_list,right_list)
 
 #Comprobamos el funcionamiento 
-listaNumerosAleatorios = [5, 2, 1, 8, 4]
+listaNumerosAleatorios = [5, 2, 1, 8, 4, 51, 25, 94, 515, 1, 9, 42, 0, 79, 10, 197, 612, 2, 3, 8, 41]
 print("Lista sin ordenar: " + str(listaNumerosAleatorios))
 listaNumerosAleatorios = mergeSort(listaNumerosAleatorios)
 print("Lista ordenada: " + str(listaNumerosAleatorios))
