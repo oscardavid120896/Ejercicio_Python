@@ -6,7 +6,7 @@ def merge(left_list, right_list):
     left_list_length, right_list_length = len(left_list), len(right_list)
     
     for _ in range(left_list_length + right_list_length):
-        if left_list_index < right_list_index and right_list_index < right_list_length:
+        if left_list_index < left_list_length and right_list_index < right_list_length:
             
             #Comprobamos el valor de cada elemento inicial de las listas para ver
             #cual es menor. Si el elemento al principio de la lista izquierda en más pequeño
